@@ -11,9 +11,11 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
 
 #include "building.h"
 #include "tinyxml2.h"
+
 
 using namespace std;
 using namespace tinyxml2;
@@ -39,6 +41,8 @@ public:
   // accessors / getters
   //
   int getNumOsmBuildings();
+
+  void print();
 
 };
 
