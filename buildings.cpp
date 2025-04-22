@@ -96,3 +96,9 @@ Buildings::Buildings(XMLDocument& xmldoc)
 int Buildings::getNumOsmBuildings() {
   return (int) this->osmBuildings.size();
 }
+
+void Buildings::print() {
+  for (Building B : this->osmBuildings) {
+    cout << B.ID << ": " << B.Name << ", " << B.StreetAddress << endl;
+  }
+}
