@@ -12,8 +12,10 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "node.h"
+#include "nodes.h"
 
 using namespace std;
 
@@ -45,6 +47,8 @@ public:
   // adds the given nodeid to the end of the vector.
   //
   void add(long long nodeid);
+
+  void print(Node& nodes);
 
 };
 
