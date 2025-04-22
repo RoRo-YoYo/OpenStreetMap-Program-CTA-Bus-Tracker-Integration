@@ -80,10 +80,7 @@ int main()
       break;
     }
     else if (name == "*") {
-      for (Building B : buildings.osmBuildings) {
-        cout << B.ID << ": " << B.Name << ", " << B.StreetAddress << endl;
-      }
-    }
+      buildings.print();}
     else {
 
       // 
