@@ -102,3 +102,16 @@ void Buildings::print() {
     cout << B.ID << ": " << B.Name << ", " << B.StreetAddress << endl;
   }
 }
+
+void Buildings::findAndPrint(string name,Nodes& nodes) {
+  bool foundBuilding = false;
+  for (Building B : this->osmBuildings)
+  {
+    if (B.Name.find(name) != string::npos) {  // contains name:
+      foundBuilding = true;
+      B.print(nodes);
+    }//if
+  }//for
+  if (!foundBuilding)
+  cout << "No such building" << endl;
+}
