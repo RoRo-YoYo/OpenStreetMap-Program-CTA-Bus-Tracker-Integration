@@ -48,7 +48,7 @@ public:
   //
   void add(long long nodeid);
 
-  void print(Node& nodes);
+  void print(Nodes& nodes);
 
 };
 
