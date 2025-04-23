@@ -82,23 +82,10 @@ int main()
     else if (name == "*") {
       buildings.print();}
     else {
-
       // 
       // find every building that contains this name:
       //
-      bool foundBuilding = false;
-
-      for (Building B : buildings.osmBuildings)
-      {
-        if (B.Name.find(name) != string::npos) {  // contains name:
-          foundBuilding = true;
-          B.print(nodes);
-        }//if
-      }//for
-
-      if (!foundBuilding)
-        cout << "No such building" << endl;
-
+      buildings.findAndPrint(name,nodes);
     }//else
 
   }//while
