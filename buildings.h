@@ -44,6 +44,8 @@ public:
 
   void print();
 
+  void findAndPrint(string name,Nodes& nodes);
+
 };
 
 
