@@ -91,36 +91,8 @@ int main()
       for (Building B : buildings.osmBuildings)
       {
         if (B.Name.find(name) != string::npos) {  // contains name:
-
           foundBuilding = true;
-
-          cout << B.Name << endl;
-          cout << "Address: " << B.StreetAddress << endl;
-          cout << "Building ID: " << B.ID << endl;
-
-          cout << "Nodes:" << endl;
-          for (long long nodeid : B.NodeIDs)
-          {
-            cout << "  " << nodeid << ": ";
-
-            double lat = 0.0;
-            double lon = 0.0;
-            bool entrance = false;
-
-            bool foundNode = nodes.find(nodeid, lat, lon, entrance);
-
-            if (foundNode) {
-              cout << "(" << lat << ", " << lon << ")";
-
-              if (entrance)
-                cout << ", is entrance";
-
-              cout << endl;
-            }
-            else {
-              cout << "**NOT FOUND**" << endl;
-            }
-          }//for
+          B.print(nodes);
         }//if
       }//for
 
