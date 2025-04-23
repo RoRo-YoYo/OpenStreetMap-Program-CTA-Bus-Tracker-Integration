@@ -10,6 +10,7 @@
 
 #pragma once
 
+#include <utility>
 #include <string>
 #include <vector>
 #include <iostream>
@@ -49,6 +50,9 @@ public:
   void add(long long nodeid);
 
   void print(Nodes& nodes);
+  
+
+  pair<double,double> getLocation(Nodes& nodes);
 
 };
 
