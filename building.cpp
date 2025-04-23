@@ -41,29 +41,29 @@ void Building::print(Nodes& nodes) {
     cout << this->Name << endl;
     cout << "Address: " << this->StreetAddress << endl;
     cout << "Building ID: " << this->ID << endl;
-
-    cout << "Nodes:" << endl;
+    cout << "# perimeter nodes: " << this->NodeIDs.size();
+    // cout << "Nodes:" << endl;
     for (long long nodeid : this->NodeIDs)
     {
-      cout << "  " << nodeid << ": ";
+      // cout << "  " << nodeid << ": ";
 
       double lat = 0.0;
       double lon = 0.0;
       bool entrance = false;
 
-      bool foundNode = nodes.find(nodeid, lat, lon, entrance);
+      // bool foundNode = nodes.find(nodeid, lat, lon, entrance);
 
-      if (foundNode) {
-        cout << "(" << lat << ", " << lon << ")";
+      // if (foundNode) {
+      //   cout << "(" << lat << ", " << lon << ")";
 
-        if (entrance)
-          cout << ", is entrance";
+      //   if (entrance)
+      //     cout << ", is entrance";
 
-        cout << endl;
-      }
-      else {
-        cout << "**NOT FOUND**" << endl;
-      }
+      //   cout << endl;
+      // }
+      // else {
+        // cout << "**NOT FOUND**" << endl;
+      // }
     }//for
 }
 
