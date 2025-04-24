@@ -18,6 +18,9 @@
 #include "nodes.h"
 #include "osm.h"
 #include "tinyxml2.h"
+#include "busstop.h"
+#include "busstops.h"
+
 
 using namespace std;
 using namespace tinyxml2;
@@ -37,6 +40,7 @@ int main()
   cout << endl;
   cout << "Enter map filename>" << endl;
   getline(cin, filename);
+  
 
   //
   // 1. load XML-based map file 
@@ -59,6 +63,11 @@ int main()
   Buildings buildings(xmldoc);
 
   //
+  // 4. create and read the bus stops:
+  //
+  BusStops busstops;
+
+  //
   // 5. stats
   //
   cout << "# of nodes: " << nodes.getNumOsmNodes() << endl;
@@ -79,6 +88,9 @@ int main()
     if (name == "$") {
       break;
     }
+    else if (name == "@") {
+      busstops.print();
+    }
     else if (name == "*") {
       buildings.print();}
     else {
@@ -89,6 +101,8 @@ int main()
     }//else
 
   }//while
+
+
 
   //
   // done:
