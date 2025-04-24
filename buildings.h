@@ -50,7 +50,7 @@ public:
 
   void print();
 
-  void findAndPrint(string name,Nodes& nodes, BusStops& busstops, CURL* curl);
+  void findAndPrint(string& name,Nodes& nodes, BusStops& busstops, CURL* curl);
 
 };
 
