@@ -2,9 +2,10 @@
 
 //
 // Program to input Nodes (positions) and Buildings from
-// an Open Street Map file.
+// an Open Street Map file. Also, input bus stops information from a CVS file
 // 
-// Prof. Joe Hummel
+// Orig. Prof. Joe Hummel
+// Rocelyn Young
 // Northwestern University
 // CS 211
 // 
@@ -23,10 +24,8 @@
 #include "dist.h"
 #include "curl_util.h"
 
-
 using namespace std;
 using namespace tinyxml2;
-
 
 //
 // main
@@ -110,12 +109,10 @@ int main()
       // find every building that contains this name:
       //
       
-      buildings.findAndPrint(name,nodes,busstops);
+      buildings.findAndPrint(name,nodes,busstops,curl);
     }//else
 
   }//while
-
-
 
   //
   // done:
@@ -125,10 +122,8 @@ int main()
 
   cout << endl;
   cout << "** Done **" << endl;
-  //cout << "# of calls to getID(): " << Node::getCallsToGetID() << endl;
-  //cout << "# of Nodes created: " << Node::getCreated() << endl;
-  //cout << "# of Nodes copied: " << Node::getCopied() << endl;
-
-
+  cout << "# of calls to getID(): " << Node::getCallsToGetID() << endl;
+  cout << "# of Nodes created: " << Node::getCreated() << endl;
+  cout << "# of Nodes copied: " << Node::getCopied() << endl;
   return 0;
 }
