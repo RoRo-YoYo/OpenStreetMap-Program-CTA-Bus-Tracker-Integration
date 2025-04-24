@@ -16,6 +16,7 @@
 #include <utility>
 
 #include "busstop.h"
+#include "dist.h"
 
 using namespace std;
 
