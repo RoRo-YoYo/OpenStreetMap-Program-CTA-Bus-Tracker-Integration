@@ -83,6 +83,7 @@ int main()
   //
   cout << "# of nodes: " << nodes.getNumOsmNodes() << endl;
   cout << "# of buildings: " << buildings.getNumOsmBuildings() << endl;
+  cout << "# of bus: " << busstops.getNumBusStops() << endl;
 
   //
   // now let the user for search for 1 or more buildings:
@@ -121,9 +122,9 @@ int main()
   curl_global_cleanup();
 
   cout << endl;
-  cout << "** Done **" << endl;
-  cout << "# of calls to getID(): " << Node::getCallsToGetID() << endl;
-  cout << "# of Nodes created: " << Node::getCreated() << endl;
-  cout << "# of Nodes copied: " << Node::getCopied() << endl;
+  // cout << "** Done **" << endl;
+  // cout << "# of calls to getID(): " << Node::getCallsToGetID() << endl;
+  // cout << "# of Nodes created: " << Node::getCreated() << endl;
+  // cout << "# of Nodes copied: " << Node::getCopied() << endl;
   return 0;
 }
