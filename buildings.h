@@ -3,7 +3,8 @@
 //
 // A collection of buildings in the Open Street Map.
 // 
-// Prof. Joe Hummel
+// Orig. Prof. Joe Hummel
+// Rocelyn Young
 // Northwestern University
 // CS 211
 // 
