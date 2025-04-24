@@ -27,7 +27,7 @@ using json = nlohmann::json;
     : ID(id), Route(route), StopName(stopname),Direction(direction),Location(location),Lat(lat),Lon(lon)
     {}
 
-    void BusStop::print(double miles, CURL* curl) {
+    void BusStop::print(double& miles, CURL* curl) {
     // //
     // // Find and Print closest south bound. Set up url
     // //
@@ -53,7 +53,7 @@ using json = nlohmann::json;
     // //
     // // Find the prediction given curl, url, and string to store the information found. Print out, if exist. Else, catch error if not.
     // // 
-    void BusStop::printBusPrediction(CURL* curl, string url, string& response) {
+    void BusStop::printBusPrediction(CURL* curl, string& url, string& response) {
         if (callWebServer(curl, url, response) == true) {
            auto jsondata = json::parse(response);
            auto bus_response = jsondata["bustime-response"];
