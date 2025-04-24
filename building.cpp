@@ -16,6 +16,8 @@
 #include "building.h"
 #include "node.h"
 #include "nodes.h"
+#include "busstops.h"
+#include "busstop.h"
 
 using namespace std;
 
@@ -38,13 +40,19 @@ void Building::add(long long nodeid)
 }
 
 void Building::print(Nodes& nodes) {
-
+    BusStops busstops; // Hard-coded, not dependence on main
     cout << this->Name << endl;
     cout << "Address: " << this->StreetAddress << endl;
     cout << "Building ID: " << this->ID << endl;
     cout << "# perimeter nodes: " << this->NodeIDs.size() << endl; 
     pair<double,double> P = this->getLocation(nodes);
     cout << "Location: (" << P.first << ", " << P.second << ")" << endl;
+    pair<BusStop,double> SouthDistance = busstops.SouthClosestStop(P.first, P.second);
+    cout << "Closest southbound bus stop:" << endl;
+    cout << " " << SouthDistance.first.ID << ":" << SouthDistance.first.StopName << ", bus #" << SouthDistance.first.Route << ", " << SouthDistance.first.Location << ", " << SouthDistance.second << " miles" << endl;
+    pair<BusStop,double> NorthDistance = busstops.NorthClosestStop(P.first, P.second);
+    cout << "Closest southbound bus stop:" << endl;
+    cout << " " << NorthDistance.first.ID << ":" << NorthDistance.first.StopName << ", bus #" << NorthDistance.first.Route << ", " << NorthDistance.first.Location << ", " << NorthDistance.second << " miles" << endl;
     // cout << "Nodes:" << endl;
     // for (long long nodeid : this->NodeIDs)
     // {
