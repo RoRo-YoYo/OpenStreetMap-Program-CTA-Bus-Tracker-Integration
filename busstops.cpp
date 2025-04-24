@@ -65,9 +65,8 @@ using namespace std;
         this->vecBusStops.emplace_back(B); // Push in in-place
     }//while
  };
- int getNumBusStops(); {
-    this->
- }
+ int BusStops::getNumBusStops() {
+    return (int) this->vecBusStops.size();}
 
  void BusStops::print() {
     //
