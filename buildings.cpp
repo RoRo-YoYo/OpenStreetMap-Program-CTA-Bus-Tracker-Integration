@@ -97,13 +97,13 @@ int Buildings::getNumOsmBuildings() {
   return (int) this->osmBuildings.size();}
 
 void Buildings::print() {
-  for (Building B : this->osmBuildings) {
+  for (Building& B : this->osmBuildings) {
     cout << B.ID << ": " << B.Name << ", " << B.StreetAddress << endl;
   }}
 
-void Buildings::findAndPrint(string name,Nodes& nodes, BusStops& busstops, CURL* curl) {
+void Buildings::findAndPrint(string& name,Nodes& nodes, BusStops& busstops, CURL* curl) {
   bool foundBuilding = false;
-  for (Building B : this->osmBuildings)
+  for (Building& B : this->osmBuildings)
   {
     if (B.Name.find(name) != string::npos) {  // contains name:
       foundBuilding = true;
@@ -113,10 +113,10 @@ void Buildings::findAndPrint(string name,Nodes& nodes, BusStops& busstops, CURL*
       //
       // Access the parameters for BusStop::Print and call BusPrint::Print
       //
-      BusStop southbus = buswithdist[0].first;
-      double southmiles = buswithdist[0].second;
-      BusStop northbus = buswithdist[1].first;
-      double nortmiles = buswithdist[1].second;
+      BusStop& southbus = buswithdist[0].first;
+      double& southmiles = buswithdist[0].second;
+      BusStop& northbus = buswithdist[1].first;
+      double& nortmiles = buswithdist[1].second;
 
       southbus.print(southmiles, curl);
       northbus.print(nortmiles, curl);} //if
