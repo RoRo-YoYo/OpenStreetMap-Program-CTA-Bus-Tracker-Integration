@@ -87,52 +87,41 @@ using namespace std;
         });
  
     for (BusStop B : this->vecBusStops) {
-        cout << B.ID << ": " << B.Route << ", " << B.StopName << ", " << B.Direction << ", " << B.Location << ", " << B.Lat << ", " << B.Lon <<  endl;}
+        cout << B.ID << ": " << B.Route << ", " << B.StopName << ", " << B.Direction << ", " << B.Location << ", " << B.Lat << ", " << B.Lon <<  endl;
+    }
 };
 
-pair<BusStop,double> BusStops::SouthClosestStop(double building_lat, double building_lon) {
-    vector<pair<BusStop,double>> BusStopWithMiles;
+
+vector<pair<BusStop,double>> BusStops::ClosestStop(double building_lat, double building_lon) {
+    vector<pair<BusStop,double>> ClosestSouth;
+    vector<pair<BusStop,double>> ClosestNorth;
+    vector<pair<BusStop,double>> ClosestStops;
+
     for (BusStop B: this->vecBusStops) {
         //
         // Iterate through bus stops. If it's SouthBound, take the lat and lon for each and calculate the distance given the building
         //
         if (B.Direction == "Southbound") {
         double miles = distBetween2Points(building_lat, building_lon, B.Lat, B.Lon);
-        BusStopWithMiles.push_back(make_pair(B,miles));}}
+        ClosestSouth.push_back(make_pair(B,miles));}
 
-    //
-    // Sort miles into ascending order
-    //    
-    sort(BusStopWithMiles.begin(),BusStopWithMiles.end(),
-    [](pair<BusStop,double> P1, pair<BusStop,double> P2){
-        if (P1.second < P2.second) // keep
-            return true;
-        else // swap
-            return false;
-    });
-
-    //
-    // Return the pair with the shortest distance by indexing [0]
-    //
-    return BusStopWithMiles[0];
-
-}
-
-
-pair<BusStop,double> BusStops::NorthClosestStop(double building_lat, double building_lon) {
-    vector<pair<BusStop,double>> BusStopWithMiles;
-    for (BusStop B: this->vecBusStops) {
-        //
-        // Iterate through bus stops. If it's SouthBound, take the lat and lon for each and calculate the distance given the building
-        //
         if (B.Direction == "Northbound") {
-        double miles = distBetween2Points(building_lat, building_lon, B.Lat, B.Lon);
-        BusStopWithMiles.push_back(make_pair(B,miles));}}
+            double miles = distBetween2Points(building_lat, building_lon, B.Lat, B.Lon);
+            ClosestNorth.push_back(make_pair(B,miles));}}
 
     //
     // Sort miles into ascending order
-    //    
-    sort(BusStopWithMiles.begin(),BusStopWithMiles.end(),
+    //   
+
+    sort(ClosestSouth.begin(),ClosestSouth.end(),
+    [](pair<BusStop,double> P1, pair<BusStop,double> P2){
+        if (P1.second < P2.second) // keep
+            return true;
+        else // swap
+            return false;
+    });
+
+    sort(ClosestNorth.begin(),ClosestNorth.end(),
     [](pair<BusStop,double> P1, pair<BusStop,double> P2){
         if (P1.second < P2.second) // keep
             return true;
@@ -143,6 +132,36 @@ pair<BusStop,double> BusStops::NorthClosestStop(double building_lat, double buil
     //
     // Return the pair with the shortest distance by indexing [0]
     //
-    return BusStopWithMiles[0];
 
-}
+    ClosestStops.push_back(ClosestSouth[0]);
+    ClosestStops.push_back(ClosestNorth[0]);
+
+
+    return ClosestStops;
+
+
+// pair<BusStop,double> BusStops::NorthClosestStop(double building_lat, double building_lon) {
+//     vector<pair<BusStop,double>> BusStopWithMiles;
+//     for (BusStop B: this->vecBusStops) {
+//         //
+//         // Iterate through bus stops. If it's SouthBound, take the lat and lon for each and calculate the distance given the building
+//         //
+//         if (B.Direction == "Northbound") {
+//         double miles = distBetween2Points(building_lat, building_lon, B.Lat, B.Lon);
+//         BusStopWithMiles.push_back(make_pair(B,miles));}}
+
+//     //
+//     // Sort miles into ascending order
+//     //    
+//     sort(BusStopWithMiles.begin(),BusStopWithMiles.end(),
+//     [](pair<BusStop,double> P1, pair<BusStop,double> P2){
+//         if (P1.second < P2.second) // keep
+//             return true;
+//         else // swap
+//             return false;
+//     });
+
+//     //
+//     // Return the pair with the shortest distance by indexing [0]
+//     //
+//     return BusStopWithMiles[0];}
