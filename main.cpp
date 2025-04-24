@@ -20,6 +20,8 @@
 #include "tinyxml2.h"
 #include "busstop.h"
 #include "busstops.h"
+#include "dist.h"
+#include "curl_util.h"
 
 
 using namespace std;
@@ -41,6 +43,16 @@ int main()
   cout << "Enter map filename>" << endl;
   getline(cin, filename);
   
+  //
+  // Initialize API
+  //
+
+  CURL* curl = curl_easy_init();
+  if (curl == nullptr) {
+  cout << "**ERROR:" << endl;
+  cout << "**ERROR: unable to initialize curl library" << endl;
+  cout << "**ERROR:" << endl;
+  return 0;}
 
   //
   // 1. load XML-based map file 
@@ -81,7 +93,7 @@ int main()
     string name;
 
     cout << endl;
-    cout << "Enter building name (partial or complete), or * to list, or $ to end>" << endl;
+    cout << "Enter building name (partial or complete), or * to list, or @ for bus stops, or $ to end>" << endl;
 
     getline(cin, name);
 
@@ -97,7 +109,8 @@ int main()
       // 
       // find every building that contains this name:
       //
-      buildings.findAndPrint(name,nodes);
+      
+      buildings.findAndPrint(name,nodes,busstops);
     }//else
 
   }//while
@@ -107,11 +120,15 @@ int main()
   //
   // done:
   //
+  curl_easy_cleanup(curl);
+  curl_global_cleanup();
+
   cout << endl;
   cout << "** Done **" << endl;
   //cout << "# of calls to getID(): " << Node::getCallsToGetID() << endl;
   //cout << "# of Nodes created: " << Node::getCreated() << endl;
   //cout << "# of Nodes copied: " << Node::getCopied() << endl;
+
 
   return 0;
 }
