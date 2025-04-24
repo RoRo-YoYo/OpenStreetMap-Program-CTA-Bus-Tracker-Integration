@@ -30,14 +30,12 @@ class BusStops
     // Given an CVS document, reads through the document and 
     // parse each line
     //
-
     BusStops();
 
+    // Sort bus into ascending order by ID and print
     void print();
 
+    // Iterate through bus stops,look for Southbound and Northbound. Take the lat and lon for each and calculate the distance given the building location
+    // Return the northstop and southstop with it's associated miles
     vector<pair<BusStop,double>> ClosestStop(double building_lat, double building_lon);
-    // pair<BusStop,double> SouthClosestStop(double place_lat,double place_lon);
-
-    // pair<BusStop,double> NorthClosestStop(double building_lat, double building_lon);
-
-};
+   };
