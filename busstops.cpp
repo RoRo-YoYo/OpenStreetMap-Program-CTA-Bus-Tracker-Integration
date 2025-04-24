@@ -73,14 +73,14 @@ using namespace std;
     //Sort bus into ascending order by ID:
     //
     sort(this->vecBusStops.begin(),this->vecBusStops.end(),
-        [](BusStop B1,BusStop B2){
+        [](BusStop& B1,BusStop& B2){
             if (B1.ID < B2.ID) // keep
                 return true;
             else // swap
                 return false;
         });
  
-    for (BusStop B : this->vecBusStops) {
+    for (BusStop& B : this->vecBusStops) {
         cout << B.ID << ": bus " << B.Route << ", " << B.StopName << ", " << B.Direction << ", " << B.Location << ", location (" << B.Lat << ", " << B.Lon << ")" << endl;
     }
 };
@@ -105,7 +105,7 @@ vector<pair<BusStop,double>> BusStops::ClosestStop(double building_lat, double b
     // Sort miles into ascending order
     //   
     sort(ClosestSouth.begin(),ClosestSouth.end(),
-    [](pair<BusStop,double> P1, pair<BusStop,double> P2){
+    [](pair<BusStop,double>& P1, pair<BusStop,double>& P2){
         if (P1.second < P2.second) // keep
             return true;
         else // swap
@@ -113,7 +113,7 @@ vector<pair<BusStop,double>> BusStops::ClosestStop(double building_lat, double b
     });
 
     sort(ClosestNorth.begin(),ClosestNorth.end(),
-    [](pair<BusStop,double> P1, pair<BusStop,double> P2){
+    [](pair<BusStop,double>& P1, pair<BusStop,double>& P2){
         if (P1.second < P2.second) // keep
             return true;
         else // swap
