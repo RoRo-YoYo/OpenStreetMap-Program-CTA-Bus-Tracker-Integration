@@ -8,7 +8,6 @@
 // CS 211
 // 
 
-
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -18,10 +17,8 @@
 
 #include "busstops.h"
 
-
 using namespace std;
-
-    
+ 
     //
     // constructor
     //
@@ -32,13 +29,11 @@ using namespace std;
     BusStops::BusStops() {
         ifstream infile;
 
+        this->vecBusStops.reserve(1600); // Avoid constant doubling
+
         infile.open("bus-stops.txt"); //Open file
         if (infile.fail()) {
-            cout << "Bus file failed";
-        }
-
-
-
+            cout << "Bus file failed";}
 
         while (true) {
 
@@ -50,7 +45,6 @@ using namespace std;
             break;}
 
         stringstream parser(line); // setup to parse the line
-
         string id_str, route_str, stopname, direction, location, lat_str, lon_str;
 
         getline(parser, id_str, ',');// extract each value:
@@ -68,9 +62,7 @@ using namespace std;
         double lon = stod(lon_str);
 
         BusStop B(id,route,stopname,direction,location,lat,lon);
-
-        this->vecBusStops.push_back(B);
-
+        this->vecBusStops.emplace_back(B); // Push in in-place
     }//while
  };
 
@@ -91,28 +83,25 @@ using namespace std;
     }
 };
 
-
 vector<pair<BusStop,double>> BusStops::ClosestStop(double building_lat, double building_lon) {
     vector<pair<BusStop,double>> ClosestSouth;
     vector<pair<BusStop,double>> ClosestNorth;
     vector<pair<BusStop,double>> ClosestStops;
 
-    for (BusStop B: this->vecBusStops) {
+    for (BusStop& B: this->vecBusStops) {
         //
         // Iterate through bus stops. If it's SouthBound, take the lat and lon for each and calculate the distance given the building
         //
         if (B.Direction == "Southbound") {
         double miles = distBetween2Points(building_lat, building_lon, B.Lat, B.Lon);
-        ClosestSouth.push_back(make_pair(B,miles));}
+        ClosestSouth.emplace_back(make_pair(B,miles));}
 
         if (B.Direction == "Northbound") {
             double miles = distBetween2Points(building_lat, building_lon, B.Lat, B.Lon);
-            ClosestNorth.push_back(make_pair(B,miles));}}
-
+            ClosestNorth.emplace_back(make_pair(B,miles));}}
     //
     // Sort miles into ascending order
     //   
-
     sort(ClosestSouth.begin(),ClosestSouth.end(),
     [](pair<BusStop,double> P1, pair<BusStop,double> P2){
         if (P1.second < P2.second) // keep
@@ -128,40 +117,12 @@ vector<pair<BusStop,double>> BusStops::ClosestStop(double building_lat, double b
         else // swap
             return false;
     });
-
     //
     // Return the pair with the shortest distance by indexing [0]
     //
-
-    ClosestStops.push_back(ClosestSouth[0]);
-    ClosestStops.push_back(ClosestNorth[0]);
-
+    ClosestStops.emplace_back(ClosestSouth[0]);
+    ClosestStops.emplace_back(ClosestNorth[0]);
 
     return ClosestStops; }
 
 
-// pair<BusStop,double> BusStops::NorthClosestStop(double building_lat, double building_lon) {
-//     vector<pair<BusStop,double>> BusStopWithMiles;
-//     for (BusStop B: this->vecBusStops) {
-//         //
-//         // Iterate through bus stops. If it's SouthBound, take the lat and lon for each and calculate the distance given the building
-//         //
-//         if (B.Direction == "Northbound") {
-//         double miles = distBetween2Points(building_lat, building_lon, B.Lat, B.Lon);
-//         BusStopWithMiles.push_back(make_pair(B,miles));}}
-
-//     //
-//     // Sort miles into ascending order
-//     //    
-//     sort(BusStopWithMiles.begin(),BusStopWithMiles.end(),
-//     [](pair<BusStop,double> P1, pair<BusStop,double> P2){
-//         if (P1.second < P2.second) // keep
-//             return true;
-//         else // swap
-//             return false;
-//     });
-
-//     //
-//     // Return the pair with the shortest distance by indexing [0]
-//     //
-//     return BusStopWithMiles[0];}
