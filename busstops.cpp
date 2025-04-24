@@ -17,6 +17,7 @@
 #include <vector>
 
 #include "busstops.h"
+#include "dist.h"
 
 using namespace std;
 
@@ -75,7 +76,7 @@ using namespace std;
 
  void BusStops::print() {
     //
-    //Sort boats into alphabetical order by name:
+    //Sort bus into ascending order by ID:
     //
     sort(this->vecBusStops.begin(),this->vecBusStops.end(),
         [](BusStop B1,BusStop B2){
@@ -89,7 +90,59 @@ using namespace std;
         cout << B.ID << ": " << B.Route << ", " << B.StopName << ", " << B.Direction << ", " << B.Location << ", " << B.Lat << ", " << B.Lon <<  endl;}
 };
 
+pair<BusStop,double> BusStops::SouthClosestStop(double building_lat, double building_lon) {
+    vector<pair<BusStop,double>> BusStopWithMiles;
+    for (BusStop B: this->vecBusStops) {
+        //
+        // Iterate through bus stops. If it's SouthBound, take the lat and lon for each and calculate the distance given the building
+        //
+        if (B.Direction == "Southbound") {
+        double miles = distBetween2Points(building_lat, building_lon, B.Lat, B.Lon);
+        BusStopWithMiles.push_back(make_pair(B,miles));}}
+
+    //
+    // Sort miles into ascending order
+    //    
+    sort(BusStopWithMiles.begin(),BusStopWithMiles.end(),
+    [](pair<BusStop,double> P1, pair<BusStop,double> P2){
+        if (P1.second < P2.second) // keep
+            return true;
+        else // swap
+            return false;
+    });
+
+    //
+    // Return the pair with the shortest distance by indexing [0]
+    //
+    return BusStopWithMiles[0];
+
+}
 
 
+pair<BusStop,double> BusStops::NorthClosestStop(double building_lat, double building_lon) {
+    vector<pair<BusStop,double>> BusStopWithMiles;
+    for (BusStop B: this->vecBusStops) {
+        //
+        // Iterate through bus stops. If it's SouthBound, take the lat and lon for each and calculate the distance given the building
+        //
+        if (B.Direction == "Northbound") {
+        double miles = distBetween2Points(building_lat, building_lon, B.Lat, B.Lon);
+        BusStopWithMiles.push_back(make_pair(B,miles));}}
 
+    //
+    // Sort miles into ascending order
+    //    
+    sort(BusStopWithMiles.begin(),BusStopWithMiles.end(),
+    [](pair<BusStop,double> P1, pair<BusStop,double> P2){
+        if (P1.second < P2.second) // keep
+            return true;
+        else // swap
+            return false;
+    });
 
+    //
+    // Return the pair with the shortest distance by indexing [0]
+    //
+    return BusStopWithMiles[0];
+
+}
