@@ -65,6 +65,9 @@ using namespace std;
         this->vecBusStops.emplace_back(B); // Push in in-place
     }//while
  };
+ int getNumBusStops(); {
+    this->
+ }
 
  void BusStops::print() {
     //
@@ -79,7 +82,7 @@ using namespace std;
         });
  
     for (BusStop B : this->vecBusStops) {
-        cout << B.ID << ": " << B.Route << ", " << B.StopName << ", " << B.Direction << ", " << B.Location << ", " << B.Lat << ", " << B.Lon <<  endl;
+        cout << B.ID << ": bus " << B.Route << ", " << B.StopName << ", " << B.Direction << ", " << B.Location << ", location (" << B.Lat << ", " << B.Lon << ")" << endl;
     }
 };
 
