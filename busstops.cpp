@@ -17,7 +17,7 @@
 #include <vector>
 
 #include "busstops.h"
-#include "dist.h"
+
 
 using namespace std;
 
@@ -137,7 +137,7 @@ vector<pair<BusStop,double>> BusStops::ClosestStop(double building_lat, double b
     ClosestStops.push_back(ClosestNorth[0]);
 
 
-    return ClosestStops;
+    return ClosestStops; }
 
 
 // pair<BusStop,double> BusStops::NorthClosestStop(double building_lat, double building_lon) {
