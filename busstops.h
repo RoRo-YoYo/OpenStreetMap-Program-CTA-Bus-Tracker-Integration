@@ -34,8 +34,9 @@ class BusStops
 
     void print();
 
-    pair<BusStop,double> SouthClosestStop(double place_lat,double place_lon);
+    vector<pair<BusStop,double>> ClosestStop(double building_lat, double building_lon);
+    // pair<BusStop,double> SouthClosestStop(double place_lat,double place_lon);
 
-    pair<BusStop,double> NorthClosestStop(double building_lat, double building_lon);
+    // pair<BusStop,double> NorthClosestStop(double building_lat, double building_lon);
 
 };
