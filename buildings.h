@@ -15,6 +15,11 @@
 
 #include "building.h"
 #include "tinyxml2.h"
+#include "osm.h"
+#include "tinyxml2.h"
+#include "busstops.h"
+#include "busstop.h"
+#include "curl_util.h"
 
 
 using namespace std;
@@ -44,7 +49,7 @@ public:
 
   void print();
 
-  void findAndPrint(string name,Nodes& nodes, BusStops& busstop);
+  void findAndPrint(string name,Nodes& nodes, BusStops& busstops, CURL* curl);
 
 };
 
