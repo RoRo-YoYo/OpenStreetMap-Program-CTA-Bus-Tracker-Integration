@@ -15,6 +15,7 @@
 
 #include "nodes.h"
 #include "node.h"
+#include "curl_util.h"
 
 using namespace std;
 
@@ -38,8 +39,8 @@ class BusStop
 
     BusStop(int id, int route, string stopname, string direction, string location, double lat, double lon);
 
-    void print(double miles);
+    void print(double miles,CURL* curl);
 
-    // void printBusPrediction(CURL* curl, string url, string& response);
+    void printBusPrediction(CURL* curl, string url, string& response);
 
 };
