@@ -62,7 +62,7 @@ using json = nlohmann::json;
            // for each prediction (a map) in the prediction list 
            for (auto& M : predictions) { 
             try {
-               cout << "  vehicle #" << stoi(M["vid"].get_ref<string&>()) << " on the route " << stoi(M["rt"].get_ref<string&>()) << " travelling " << M["rtdir"].get_ref<string&>() << " to arrive in " << stoi(M["prdctdn"].get_ref<string&>()) << " mins" << endl;}
+               cout << "  vehicle #" << stoi(M["vid"].get_ref<string&>()) << " on route " << stoi(M["rt"].get_ref<string&>()) << " travelling " << M["rtdir"].get_ref<string&>() << " to arrive in " << stoi(M["prdctdn"].get_ref<string&>()) << " mins" << endl;}
             //
             catch (exception& e) {
                 cout << " error" << endl;
