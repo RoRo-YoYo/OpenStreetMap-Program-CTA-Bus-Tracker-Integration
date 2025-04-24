@@ -12,17 +12,12 @@
 #include <string>
 #include <vector>
 #include <cassert>
+#include <utility>
 
 #include "buildings.h"
-#include "osm.h"
-#include "tinyxml2.h"
-#include "busstops.h"
-#include "busstop.h"
-#include "utility.h"
 
 using namespace std;
 using namespace tinyxml2;
-
 
 //
 // constructor
@@ -92,38 +87,36 @@ Buildings::Buildings(XMLDocument& xmldoc)
   // done:
   //
 }
-
 //
 // accessors / getters
 //
 int Buildings::getNumOsmBuildings() {
-  return (int) this->osmBuildings.size();
-}
+  return (int) this->osmBuildings.size();}
 
 void Buildings::print() {
   for (Building B : this->osmBuildings) {
     cout << B.ID << ": " << B.Name << ", " << B.StreetAddress << endl;
-  }
-}
+  }}
 
-void Buildings::findAndPrint(string name,Nodes& nodes, BusStops& busstop) {
+void Buildings::findAndPrint(string name,Nodes& nodes, BusStops& busstops, CURL* curl) {
   bool foundBuilding = false;
   for (Building B : this->osmBuildings)
   {
     if (B.Name.find(name) != string::npos) {  // contains name:
       foundBuilding = true;
       B.print(nodes);
-      vector<pair<BusStop,double>> buswithdist = busstop.ClosestStop(B.getLocation(nodes).first,B.getLocation(nodes).second);
-      BusStop Southbus =  buswithdist.first.first;
-      double Southdist =  buswithdist.first.second;
-      BusStop Northbus =  buswithdist.second.first;
-      double Northdist =  buswithdist.second.second;
+      vector<pair<BusStop,double>> buswithdist = busstops.ClosestStop(B.getLocation(nodes).first,B.getLocation(nodes).second);
+      
+      //
+      // Access the parameters for BusStop::Print and call BusPrint::Print
+      //
+      BusStop southbus = buswithdist[0].first;
+      double southmiles = buswithdist[0].second;
+      BusStop northbus = buswithdist[1].first;
+      double nortmiles = buswithdist[1].second;
 
-      for (pair<BusStop,double> P: buswithdist) {
-        P.first.print()}
-
-    }//if
-  }//for
+      southbus.print(southmiles, curl);
+      northbus.print(nortmiles, curl);} //if
+      }//for
   if (!foundBuilding)
-  cout << "No such building" << endl;
-}
+  cout << "No such building" << endl;}
