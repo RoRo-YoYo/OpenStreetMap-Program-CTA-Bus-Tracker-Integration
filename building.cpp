@@ -18,8 +18,12 @@
 #include "nodes.h"
 #include "busstops.h"
 #include "busstop.h"
+#include "json.hpp"
+
 
 using namespace std;
+using json = nlohmann::json;
+
 
 
 //
@@ -47,12 +51,30 @@ void Building::print(Nodes& nodes) {
     cout << "# perimeter nodes: " << this->NodeIDs.size() << endl; 
     pair<double,double> P = this->getLocation(nodes);
     cout << "Location: (" << P.first << ", " << P.second << ")" << endl;
-    pair<BusStop,double> SouthDistance = busstops.SouthClosestStop(P.first, P.second);
-    cout << "Closest southbound bus stop:" << endl;
-    cout << " " << SouthDistance.first.ID << ":" << SouthDistance.first.StopName << ", bus #" << SouthDistance.first.Route << ", " << SouthDistance.first.Location << ", " << SouthDistance.second << " miles" << endl;
-    pair<BusStop,double> NorthDistance = busstops.NorthClosestStop(P.first, P.second);
-    cout << "Closest southbound bus stop:" << endl;
-    cout << " " << NorthDistance.first.ID << ":" << NorthDistance.first.StopName << ", bus #" << NorthDistance.first.Route << ", " << NorthDistance.first.Location << ", " << NorthDistance.second << " miles" << endl;
+
+    // //
+    // // Find and Print closest south bound. Set up url
+    // //
+    // pair<BusStop,double> SouthDistance = busstops.SouthClosestStop(P.first, P.second);
+    // cout << "Closest southbound bus stop:" << endl;
+    // cout << " " << SouthDistance.first.ID << ":" << SouthDistance.first.StopName << ", bus #" << SouthDistance.first.Route << ", " << SouthDistance.first.Location << ", " << SouthDistance.second << " miles" << endl;
+    // string southurl = "http://ctabustracker.com/bustime/api/v2/getpredictions?key=jehZ84bN7qAcqWhWj8Jzvs9qE&rt=" + to_string(SouthDistance.first.Route) + "&stpid=" + to_string(SouthDistance.first.ID) + "&format=json";
+
+    // // string southresponce;
+    // // SouthDistance.first.printBusPrediction(CURL* curl, southurl, southresponce);
+
+    // //
+    // // Find and Print closest nouth bound. Set up url
+    // //
+    // pair<BusStop,double> NorthDistance = busstops.NorthClosestStop(P.first, P.second);
+    // cout << "Closest southbound bus stop:" << endl;
+    // cout << " " << NorthDistance.first.ID << ":" << NorthDistance.first.StopName << ", bus #" << NorthDistance.first.Route << ", " << NorthDistance.first.Location << ", " << NorthDistance.second << " miles" << endl;
+    // string northurl = "http://ctabustracker.com/bustime/api/v2/getpredictions?key=jehZ84bN7qAcqWhWj8Jzvs9qE&rt=" + to_string(NorthDistance.first.Route) + "&stpid=" + to_string(NorthDistance.first.ID) + "&format=json";
+
+    // // string southresponce;
+    // // SouthDistance.first.printBusPrediction(CURL* curl, southurl, southresponce);
+
+
     // cout << "Nodes:" << endl;
     // for (long long nodeid : this->NodeIDs)
     // {
@@ -105,4 +127,3 @@ pair<double,double> Building::getLocation(Nodes& nodes) {
 return make_pair(avgLat,avgLon);
 
 }
-
