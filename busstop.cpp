@@ -1,7 +1,7 @@
 /*bustop.cpp*/
 
 //
-// Take in and parse each line of the bus stop CVS file
+// A bus in a CVS file
 // 
 // Rocelyn Young
 // Northwestern University
@@ -13,36 +13,24 @@
 #include <iostream>
 #include <stdexcept>
 
-
 #include "busstop.h"
 #include "json.hpp"
 #include "node.h"
 #include "nodes.h"
 
-
-
 using namespace std;
-using json = nlohmann::json;
-
-    
+using json = nlohmann::json;  
     //
     // constructor
     //
-
-
     BusStop::BusStop(int id, int route, string stopname, string direction, string location, double lat, double lon) // Create busstop and initialize variable
     : ID(id), Route(route), StopName(stopname),Direction(direction),Location(location),Lat(lat),Lon(lon)
-    
-    {
-
-    }
+    {}
 
     void BusStop::print(double miles, CURL* curl) {
-
     // //
     // // Find and Print closest south bound. Set up url
     // //
-
     if  (this->Direction == "Southbound") {
         cout << "Closest southbound bus stop:" << endl;
         cout << "  " << this->ID << ": " << this->StopName << ", bus #" << this->Route << ", " << this->Location << ", " << miles << " miles" << endl;
@@ -50,13 +38,10 @@ using json = nlohmann::json;
 
         string southresponce;
         this->printBusPrediction(curl,southurl,southresponce);
-
     }
-
     // //
     // // Find and Print closest nouth bound. Set up url
     // //   
-
     else if (this->Direction == "Northbound") {
         cout << "Closest northbound bus stop:" << endl;
         cout << "  " << this->ID << ": " << this->StopName << ", bus #" << this->Route << ", " << this->Location << ", " << miles << " miles" << endl;
@@ -65,19 +50,9 @@ using json = nlohmann::json;
         string northresponce;
         this->printBusPrediction(curl, northurl,northresponce);
     } }
-
-     // pair<BusStop,double> SouthDistance = busstops.SouthClosestStop(P.first, P.second);
-    
-
-
-    // pair<BusStop,double> NorthDistance = busstops.NorthClosestStop(P.first, P.second);
-    // cout << "Closest southbound bus stop:" << endl;
-    // cout << " " << NorthDistance.first.ID << ":" << NorthDistance.first.StopName << ", bus #" << NorthDistance.first.Route << ", " << NorthDistance.first.Location << ", " << NorthDistance.second << " miles" << endl;
-    // string northurl = "http://ctabustracker.com/bustime/api/v2/getpredictions?key=jehZ84bN7qAcqWhWj8Jzvs9qE&rt=" + to_string(NorthDistance.first.Route) + "&stpid=" + to_string(NorthDistance.first.ID) + "&format=json";
-
-    // // string southresponce;
-    // // SouthDistance.first.printBusPrediction(CURL* curl, southurl, southresponce);
-
+    // //
+    // // Find the prediction given curl, url, and string to store the information found. Print out, if exist. Else, catch error if not.
+    // // 
     void BusStop::printBusPrediction(CURL* curl, string url, string& response) {
         if (callWebServer(curl, url, response) == true) {
            auto jsondata = json::parse(response);
@@ -94,7 +69,6 @@ using json = nlohmann::json;
                 cout << " malformed CTA response, prediction unavailable"
                      << " << bus predictions unavailable, call failed>>" << endl;}
             } //for
-
       }}
       
 
