@@ -4,6 +4,7 @@
 // A collection of nodes in the Open Street Map.
 // 
 // Prof. Joe Hummel
+// Rocelyn Young
 // Northwestern University
 // CS 211
 // 
@@ -50,6 +51,8 @@ Nodes::Nodes(XMLDocument& xmldoc)
   XMLElement* osm = xmldoc.FirstChildElement("osm");
   assert(osm != nullptr);
 
+  this->osmNodes.reserve(1600);
+
   //
   // Parse the XML document node by node: 
   //
@@ -89,7 +92,7 @@ Nodes::Nodes(XMLDocument& xmldoc)
     // This creates an object then pushes copy into vector:
     //
     Node N(id, latitude, longitude, entrance);
-    this->osmNodes.push_back(N);
+    this->osmNodes.emplace_back(N);
 
     //
     // next node element in the XML doc:
@@ -111,7 +114,7 @@ bool Nodes::find(long long id, double& lat, double& lon, bool& isEntrance)
   //
   // linear search:
   //
-  for (Node N : this->osmNodes)
+  for (Node& N : this->osmNodes)
   {
     if (N.getID() == id) {
       lat = N.getLat();
