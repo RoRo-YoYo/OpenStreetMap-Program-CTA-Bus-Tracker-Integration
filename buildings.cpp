@@ -16,6 +16,9 @@
 #include "buildings.h"
 #include "osm.h"
 #include "tinyxml2.h"
+#include "busstops.h"
+#include "busstop.h"
+#include "utility.h"
 
 using namespace std;
 using namespace tinyxml2;
@@ -103,13 +106,22 @@ void Buildings::print() {
   }
 }
 
-void Buildings::findAndPrint(string name,Nodes& nodes) {
+void Buildings::findAndPrint(string name,Nodes& nodes, BusStops& busstop) {
   bool foundBuilding = false;
   for (Building B : this->osmBuildings)
   {
     if (B.Name.find(name) != string::npos) {  // contains name:
       foundBuilding = true;
       B.print(nodes);
+      vector<pair<BusStop,double>> buswithdist = busstop.ClosestStop(B.getLocation(nodes).first,B.getLocation(nodes).second);
+      BusStop Southbus =  buswithdist.first.first;
+      double Southdist =  buswithdist.first.second;
+      BusStop Northbus =  buswithdist.second.first;
+      double Northdist =  buswithdist.second.second;
+
+      for (pair<BusStop,double> P: buswithdist) {
+        P.first.print()}
+
     }//if
   }//for
   if (!foundBuilding)
