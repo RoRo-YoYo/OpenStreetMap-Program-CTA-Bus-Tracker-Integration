@@ -33,8 +33,7 @@ class BusStops
     BusStops();
 
     // Get vector size of the busstop
-    int getNumBusStops() {
-        return (int) this->vecBusStops.size();}
+    int getNumBusStops();
 
     // Sort bus into ascending order by ID and print
     void print();
