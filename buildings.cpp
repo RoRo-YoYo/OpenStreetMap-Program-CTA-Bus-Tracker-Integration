@@ -3,7 +3,8 @@
 //
 // A collection of buildings in the Open Street Map.
 // 
-// Prof. Joe Hummel
+// Orig. Prof. Joe Hummel
+// Rocelyn Young
 // Northwestern University
 // CS 211
 // 
@@ -29,6 +30,8 @@ Buildings::Buildings(XMLDocument& xmldoc)
 {
   XMLElement* osm = xmldoc.FirstChildElement("osm");
   assert(osm != nullptr);
+
+  this->osmBuildings.reserve(1600); // Avoid constant doubling
 
   //
   // Parse the XML document way by way, looking for university buildings:
@@ -77,7 +80,7 @@ Buildings::Buildings(XMLDocument& xmldoc)
       //
       // add the building to the vector:
       //
-      this->osmBuildings.push_back(B);
+      this->osmBuildings.emplace_back(B); //push in in-palce
     }//if
 
     way = way->NextSiblingElement("way");
