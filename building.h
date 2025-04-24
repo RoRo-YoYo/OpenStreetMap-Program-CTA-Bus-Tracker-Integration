@@ -3,7 +3,8 @@
 //
 // A building in the Open Street Map.
 // 
-// Prof. Joe Hummel
+// Orig. Prof. Joe Hummel
+// Rocelyn Young
 // Northwestern University
 // CS 211
 // 
@@ -51,8 +52,6 @@ public:
 
   void print(Nodes& nodes);
   
-
   pair<double,double> getLocation(Nodes& nodes);
-
 };
 
