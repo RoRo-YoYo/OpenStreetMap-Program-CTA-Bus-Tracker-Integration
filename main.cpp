@@ -76,7 +76,7 @@ int main()
   //
   // 4. create and read the bus stops:
   //
-  BusStops busstops;
+  BusStops busstops("bus-stops.txt");
 
   //
   // 5. stats
