@@ -44,14 +44,12 @@ void Building::add(long long nodeid)
 }
 
 void Building::print(Nodes& nodes) {
-    BusStops busstops; // Hard-coded, not dependence on main
     cout << this->Name << endl;
     cout << "Address: " << this->StreetAddress << endl;
     cout << "Building ID: " << this->ID << endl;
     cout << "# perimeter nodes: " << this->NodeIDs.size() << endl; 
     pair<double,double> P = this->getLocation(nodes);
-    cout << "Location: (" << P.first << ", " << P.second << ")" << endl;
-}
+    cout << "Location: (" << P.first << ", " << P.second << ")" << endl;}
 
 pair<double,double> Building::getLocation(Nodes& nodes) {
     double avgLat = 0;
