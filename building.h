@@ -50,8 +50,14 @@ public:
   //
   void add(long long nodeid);
 
+  //
+  // adds the given nodeid to the end of the vector.
+  //
   void print(Nodes& nodes);
   
+  //
+  // adds the given nodeid to the end of the vector.
+  //
   pair<double,double> getLocation(Nodes& nodes);
 };
 
