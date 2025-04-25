@@ -83,7 +83,7 @@ int main()
   //
   cout << "# of nodes: " << nodes.getNumOsmNodes() << endl;
   cout << "# of buildings: " << buildings.getNumOsmBuildings() << endl;
-  cout << "# of bus: " << busstops.getNumBusStops() << endl;
+  cout << "# of bus stops: " << busstops.getNumBusStops() << endl;
 
   //
   // now let the user for search for 1 or more buildings:
