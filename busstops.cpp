@@ -26,7 +26,7 @@ using namespace std;
     // parse each line
     //
 
-    BusStops::BusStops() {
+    BusStops::BusStops(string filename) {
         ifstream infile;
 
         this->vecBusStops.reserve(1600); // Avoid constant doubling
