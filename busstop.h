@@ -44,6 +44,6 @@ class BusStop
     void print(double& miles,CURL* curl);
 
     // // Find the prediction given curl, url, and string to store the information found. Print out, if exist. Else, catch error if not.
-    void printBusPrediction(CURL* curl, string& url, string& response);
+    void printBusPrediction(CURL* curl, string url, string response);
 
 };
