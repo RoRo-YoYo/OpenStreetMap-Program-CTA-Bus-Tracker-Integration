@@ -122,7 +122,7 @@ int main()
   curl_global_cleanup();
 
   cout << endl;
-  // cout << "** Done **" << endl;
+  cout << "** Done **" << endl;
   // cout << "# of calls to getID(): " << Node::getCallsToGetID() << endl;
   // cout << "# of Nodes created: " << Node::getCreated() << endl;
   // cout << "# of Nodes copied: " << Node::getCopied() << endl;
