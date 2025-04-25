@@ -30,7 +30,7 @@ class BusStops
     // Given an CVS document, reads through the document and 
     // parse each line
     //
-    BusStops();
+    BusStops(string filename);
 
     // Get vector size of the busstop
     int getNumBusStops();
