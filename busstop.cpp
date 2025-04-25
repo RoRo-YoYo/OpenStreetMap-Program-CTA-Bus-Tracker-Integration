@@ -59,7 +59,10 @@ using json = nlohmann::json;
            auto jsondata = json::parse(response);
            auto bus_response = jsondata["bustime-response"];
            auto predictions = bus_response["prd"];
-           // for each prediction (a map) in the prediction list 
+
+           if (!predictions.empty()) { // If prd do exist/child is not "error"
+
+            // for each prediction (a map) in the prediction list 
            for (auto& M : predictions) { 
             try {
                cout << "  vehicle #" << stoi(M["vid"].get_ref<string&>()) << " on route " << stoi(M["rt"].get_ref<string&>()) << " travelling " << M["rtdir"].get_ref<string&>() << " to arrive in " << stoi(M["prdctdn"].get_ref<string&>()) << " mins" << endl;}
@@ -68,8 +71,12 @@ using json = nlohmann::json;
                 cout << " error" << endl;
                 cout << " malformed CTA response, prediction unavailable"
                      << " << bus predictions unavailable, call failed>>" << endl;}
-            } //for
-      }
+                 } //for
+             } // if
+             else {cout << "  <<no prediction available>>" << endl;}
+        } // if
+      else { 
+        cout << "  <<no prediction available>>" << endl;}
     }
       
 

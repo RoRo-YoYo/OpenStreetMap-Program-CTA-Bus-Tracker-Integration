@@ -31,7 +31,7 @@ using namespace std;
 
         this->vecBusStops.reserve(1600); // Avoid constant doubling
 
-        infile.open("bus-stops.txt"); //Open file
+        infile.open(filename); //Open file
         if (infile.fail()) {
             cout << "Bus file failed";}
 
