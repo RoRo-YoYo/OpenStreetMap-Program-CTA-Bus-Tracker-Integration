@@ -49,16 +49,16 @@ using json = nlohmann::json;
 
         string northresponce;
         this->printBusPrediction(curl, northurl,northresponce);
-    } }
-    // //
-    // // Find the prediction given curl, url, and string to store the information found. Print out, if exist. Else, catch error if not.
-    // // 
-    void BusStop::printBusPrediction(CURL* curl, string& url, string& response) {
+    } 
+}
+    //
+    // Find the prediction given curl, url, and string to store the information found. Print out, if exist. Else, catch error if not.
+    // 
+    void BusStop::printBusPrediction(CURL* curl, string url, string response) {
         if (callWebServer(curl, url, response) == true) {
            auto jsondata = json::parse(response);
            auto bus_response = jsondata["bustime-response"];
            auto predictions = bus_response["prd"];
-      
            // for each prediction (a map) in the prediction list 
            for (auto& M : predictions) { 
             try {
@@ -69,7 +69,8 @@ using json = nlohmann::json;
                 cout << " malformed CTA response, prediction unavailable"
                      << " << bus predictions unavailable, call failed>>" << endl;}
             } //for
-      }}
+      }
+    }
       
 
 
