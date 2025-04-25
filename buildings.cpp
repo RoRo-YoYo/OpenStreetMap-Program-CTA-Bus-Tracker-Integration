@@ -103,6 +103,7 @@ void Buildings::print() {
 
 void Buildings::findAndPrint(string& name,Nodes& nodes, BusStops& busstops, CURL* curl) {
   bool foundBuilding = false;
+  
   for (Building& B : this->osmBuildings)
   {
     if (B.Name.find(name) != string::npos) {  // contains name:
@@ -113,13 +114,14 @@ void Buildings::findAndPrint(string& name,Nodes& nodes, BusStops& busstops, CURL
       //
       // Access the parameters for BusStop::Print and call BusPrint::Print
       //
-      BusStop& southbus = buswithdist[0].first;
-      double& southmiles = buswithdist[0].second;
-      BusStop& northbus = buswithdist[1].first;
-      double& nortmiles = buswithdist[1].second;
+      BusStop southbus = buswithdist[0].first;
+      double southmiles = buswithdist[0].second;
+      BusStop northbus = buswithdist[1].first;
+      double nortmiles = buswithdist[1].second;
 
       southbus.print(southmiles, curl);
-      northbus.print(nortmiles, curl);} //if
+      northbus.print(nortmiles, curl);
+        } //if
       }//for
   if (!foundBuilding)
   cout << "No such building" << endl;}
