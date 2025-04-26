@@ -73,10 +73,10 @@ using json = nlohmann::json;
                      << " << bus predictions unavailable, call failed>>" << endl;}
                  } //for
              } // if
-             else {cout << "  <<no prediction available>>" << endl;}
+             else {cout << "  <<no predictions available>>" << endl;}
         } // if
       else { 
-        cout << "  <<no prediction available>>" << endl;}
+        cout << "  <<no predictions available>>" << endl;}
     }
       
 
